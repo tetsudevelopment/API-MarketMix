@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+    integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Convertidor</title>
+</head>
+
+<body class="">
+  <div id="app" >
+    <div>
+      <nav class="navbar navbar-expand-lg bg-light fixed-top ">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white" href="#">
+            <img src="images/logo.png" alt="logo" width="50px">
+            <span class="fw-bold h4">Usuarios</span>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-4 d-flex-lg justify-content-lg-center align-items-lg-center ">
+              <li class="nav-item ms-2 ms-lg-0">
+                <a class="nav-link text-white" href="#">
+                  <span class="fw-bold">Inicio</span>
+                </a>
+              </li>
+              <li class="nav-item" v-for="i in arrayLogin">
+                <a class="nav-link text-white" href="#">
+                  <img :src="i.picture.medium" alt="" width="50px" class="rounded-5">
+                  <span class="fw-bold" v-text="i.name.first"></span>
+                  <span class="fw-bold" v-text="i.name.last"></span>
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link fw-bold text-white"><span class="btn text-white" @click="logout">
+                    Cerrar sesión
+                    <i class="bi bi-box-arrow-in-right"></i>
+                  </span>
+      
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="p-5 mt-5 " tabindex="0">
+        <section class="container p-3">
+          <button class="btn btn-primary">Agregar Usuario</button>
+        </section>
+        <section class="container">
+          <table class="table">
+            <thead>
+              <tr class="bg-dark text-white">
+                <th scope="col">Img</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col">Edad</th>
+                <th scope="col">Nacionalidad</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="i in arrayUser">
+                <th class="text-center"><img :src="i.picture.medium" alt="" class=""></th>
+                <td class="fw-bold w-25"><span v-text="i.name.first"></span> <span v-text="i.name.last"></span></td>
+                <td class="fw-bold w-25"><span v-text="i.email"></span></td>
+                <td class="fw-bold"><span v-text="i.dob.age"></span></td>
+                <td class="fw-bold"><span v-text="i.location.country"></span></td>
+                <td>
+                  <button class="btn btn-primary">Actualizar</button>
+                  <button class="btn btn-danger">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+    </div>
+    
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.0-alpha.4/vue.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="main.js"></script>
+
+</html>

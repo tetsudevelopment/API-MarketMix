@@ -1,0 +1,12 @@
+.navbar{
+  background: #10193b!important;
+  color: white !important;
+}
+table img{
+  width: 50px;
+  border-radius: 80px;
+  border: 1px solid blue;
+}
+table tbody th{
+  width: 100px;
+}
