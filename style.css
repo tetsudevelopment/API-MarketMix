@@ -1,11 +1,11 @@
 .navbar{
-  background: #10193b!important;
-  color: white !important;
+  background: #ff741e!important;
+
 }
 table img{
   width: 50px;
   border-radius: 80px;
-  border: 1px solid blue;
+  border: 1px solid rgb(52, 52, 196);
 }
 table tbody th{
   width: 100px;

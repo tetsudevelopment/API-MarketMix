@@ -40,15 +40,15 @@
               </li>
               <li class="nav-item" v-for="i in arrayLogin">
                 <a class="nav-link text-white" href="#">
-                  <img :src="i.picture.medium" alt="" width="50px" class="rounded-5">
-                  <span class="fw-bold" v-text="i.name.first"></span>
+                  <img :src="i.picture.medium" alt="" width="50px" class="rounded-5 me-2">
+                  <span class="fw-bold " v-text="i.name.first"></span>
                   <span class="fw-bold" v-text="i.name.last"></span>
                 </a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link fw-bold text-white"><span class="btn text-white" @click="logout">
+                <a class="nav-link fw-bold text-white"><span class="btn text-white fw-bold" @click="logout">
                     Cerrar sesión
-                    <i class="bi bi-box-arrow-in-right"></i>
+                    <i class="bi bi-box-arrow-in-right fw-bold"></i>
                   </span>
       
                 </a>
@@ -57,9 +57,10 @@
           </div>
         </div>
       </nav>
+      <!-- Button trigger modal -->
       <div class="p-5 mt-5 " tabindex="0">
         <section class="container p-3">
-          <button class="btn btn-primary">Agregar Usuario</button>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar Usuario</button>
         </section>
         <section class="container">
           <table class="table">
@@ -89,7 +90,38 @@
           </table>
         </section>
       </div>
+      <!-- Modales -->
+      <section>
+        <!-- Agg Usuario -->
+        <section>
+           <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Nuevo Usuario</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                    </div>
 
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /Agg Usuario -->
+      </section>
     </div>
     
   </div>

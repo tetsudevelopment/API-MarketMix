@@ -8,19 +8,21 @@ var app = new Vue({
     pass: "",
   },
   methods: {
-    mensaje(title,tex,icon) {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Si",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire("Deleted!", "Your file has been deleted.", "success");
-        }
+    mensajeMixin(title, icon) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener("mouseenter", Swal.stopTimer);
+          toast.addEventListener("mouseleave", Swal.resumeTimer);
+        },
+      });
+      Toast.fire({
+        icon: icon,
+        title: title,
       });
     },
     async listUser() {
@@ -70,23 +72,23 @@ var app = new Vue({
           element.login.password == this.pass
       );
       if (index !== -1) {
-        alert("Inicio de sesion correcto");
         this.arrayLogin.push(this.arrayUser[index]);
-        this.updateSesion();
+        this.mensajeMixin("Iniciando Sesión", "success");
         setTimeout(function () {
           location.href = "inicio.html";
-        }, 1500);
+        }, 3000);
+        this.updateSesion();
       } else {
         alert("Usuario o Contraseña no son correctos");
       }
     },
     logout() {
+      this.mensajeMixin("Cerrando Sesión", "success");
       setTimeout(function () {
         location.href = "index.html";
-      }, 1500);
+      }, 3000);
       this.arrayLogin = [];
       this.updateSesion();
-
     },
   },
   created() {
@@ -96,3 +98,22 @@ var app = new Vue({
   mounted() {},
   computed: {},
 });
+
+
+
+var myHeaders = new Headers();
+myHeaders.append("apikey", "T8uhWDyJJHSdR47zvtal2J50NAlbJR5v");
+
+var requestOptions = {
+  method: "GET",
+  redirect: "follow",
+  headers: myHeaders,
+};
+
+fetch(
+  "https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}",
+  requestOptions
+)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.log("error", error));
