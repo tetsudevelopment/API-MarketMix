@@ -94,7 +94,7 @@
       <section>
         <!-- Agg Usuario -->
         <section>
-           <!-- Modal -->
+          <!-- Modal -->
           <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -106,10 +106,62 @@
                 <div class="modal-body">
                   <div class="container">
                     <div class="mb-3">
-                      <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                      <label for="exampleFormControlInput1" class="form-label">Email</label>
                       <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
                     </div>
-
+                    <div class="row">
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Brayan">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Marin">
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Genero</label>
+                      <select class="form-control">
+                        <option selected>Seleccione genero</option>
+                        <option v-for="i in gender" v-text="i"></option>
+                      </select>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Celular</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="3105864888">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Edad</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="19">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">País de origen</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Colombia">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Ciudad de residencia</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Confines">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="balmon">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput1">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput1" class="form-label">Repetir contraseña</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput1">
+                      </div>
+                    </div>
+                    
+                    
                   </div>
                 </div>
                 <div class="modal-footer">
@@ -120,6 +172,8 @@
             </div>
           </div>
         </section>
+
+        
         <!-- /Agg Usuario -->
       </section>
     </div>

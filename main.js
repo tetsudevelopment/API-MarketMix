@@ -3,6 +3,32 @@ var app = new Vue({
   data: {
     arrayUser: [],
     arrayLogin: [],
+    gender: ["Female", "Male"], //
+    date: {
+      gender: "",
+      picture: {
+        medium: "",
+      },
+      name: {
+        first: "",
+        last: "",
+      },
+      email: "",
+      cell: "",
+      location: {
+        country: "",
+        city: "",
+      },
+      dob: {
+        age: "",
+        date: "",
+      },
+      login: {
+        userName: "",
+        password: "",
+        passwordRep: "",
+      },
+    },
     search: "",
     user: "",
     pass: "",
@@ -15,16 +41,13 @@ var app = new Vue({
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
       });
       Toast.fire({
         icon: icon,
         title: title,
       });
     },
+    mensajeAfirm() {},
     async listUser() {
       const url = "https://randomuser.me/api/?results=10";
       await fetch(url)
@@ -44,6 +67,42 @@ var app = new Vue({
       await fetch(url)
         .then((response) => response.json())
         .then((json) => (this.arrayData = [json]));
+    },
+    async symbolsConvert() {
+      const myHeaders = new Headers();
+      myHeaders.append("apikey", "T8uhWDyJJHSdR47zvtal2J50NAlbJR5v");
+
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders,
+      };
+
+      await fetch(
+        "https://api.apilayer.com/exchangerates_data/symbols",
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
+    },
+    async convert() {
+      const myHeaders = new Headers();
+      myHeaders.append("apikey", "T8uhWDyJJHSdR47zvtal2J50NAlbJR5v");
+
+      const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders,
+      };
+
+      fetch(
+        "https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}",
+        requestOptions
+      )
+        .then((response) => response.text())
+        .then((result) => console.log(result))
+        .catch((error) => console.log("error", error));
     },
     locaDatosStora() {
       if (localStorage.getItem("users") !== null) {
@@ -72,23 +131,23 @@ var app = new Vue({
           element.login.password == this.pass
       );
       if (index !== -1) {
-        this.arrayLogin.push(this.arrayUser[index]);
         this.mensajeMixin("Iniciando Sesión", "success");
-        setTimeout(function () {
+        setTimeout(() => {
+          this.arrayLogin.push(this.arrayUser[index]);
           location.href = "inicio.html";
+          this.updateSesion();
         }, 3000);
-        this.updateSesion();
       } else {
         alert("Usuario o Contraseña no son correctos");
       }
     },
     logout() {
       this.mensajeMixin("Cerrando Sesión", "success");
-      setTimeout(function () {
+      setTimeout(() => {
         location.href = "index.html";
+        this.arrayLogin = [];
+        this.updateSesion();
       }, 3000);
-      this.arrayLogin = [];
-      this.updateSesion();
     },
   },
   created() {
@@ -101,19 +160,3 @@ var app = new Vue({
 
 
 
-var myHeaders = new Headers();
-myHeaders.append("apikey", "T8uhWDyJJHSdR47zvtal2J50NAlbJR5v");
-
-var requestOptions = {
-  method: "GET",
-  redirect: "follow",
-  headers: myHeaders,
-};
-
-fetch(
-  "https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}",
-  requestOptions
-)
-  .then((response) => response.text())
-  .then((result) => console.log(result))
-  .catch((error) => console.log("error", error));
