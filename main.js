@@ -3,7 +3,14 @@ var app = new Vue({
   data: {
     arrayUser: [],
     arrayLogin: [],
-    gender: ["Female", "Male"], //
+    img:'',
+    from: '',
+    to: '',
+    amount:'',
+    gender: {
+      female: 'Femenino',
+      male:'Masculino'
+    }, //
     date: {
       gender: "",
       picture: {
@@ -34,6 +41,21 @@ var app = new Vue({
     pass: "",
   },
   methods: {
+   async imgg() {
+      console.log(this.date.gender);
+      const url = `https://randomuser.me/api/?gender=${this.date.gender}`;
+      await fetch(url)
+        .then((response) => response.json())
+        .then((json) => (this.img = json.results));
+      // this.date.picture.medium = this.img;
+      this.img.forEach(element => {
+        this.date.picture.medium= element.picture.medium
+      });
+    },
+    prueba() {
+      this.imgg();
+      
+    },
     mensajeMixin(title, icon) {
       const Toast = Swal.mixin({
         toast: true,
@@ -62,6 +84,9 @@ var app = new Vue({
       });
       this.updateLocal();
     },
+    listImg() {
+      
+    },
     async searchUser() {
       const url = `https://jsonplaceholder.typicode.com/users/${this.search}`;
       await fetch(url)
@@ -83,7 +108,7 @@ var app = new Vue({
         requestOptions
       )
         .then((response) => response.json())
-        .then((result) => console.log(result))
+        .then((result) => console.log(result.symbols))
         .catch((error) => console.log("error", error));
     },
     async convert() {

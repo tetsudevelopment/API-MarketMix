@@ -62,6 +62,9 @@
         <section class="container p-3">
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar Usuario</button>
         </section>
+        <section class="container p-3">
+          <button class="btn btn-primary" @click="symbolsConvert">Usuario</button>
+        </section>
         <section class="container">
           <table class="table">
             <thead>
@@ -107,57 +110,58 @@
                   <div class="container">
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" v-model="date.email">
+                      
                     </div>
                     <div class="row">
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Brayan">
+                        <label for="exampleFormControlInput2" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput2" placeholder="Brayan" v-model="date.name.first"> 
                       </div>
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Marin">
+                        <label for="exampleFormControlInput3" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput3" placeholder="Marin" v-model="date.name.last">
                       </div>
                     </div>
                     <div class="mb-3">
-                      <label for="exampleFormControlInput1" class="form-label">Genero</label>
-                      <select class="form-control">
-                        <option selected>Seleccione genero</option>
-                        <option v-for="i in gender" v-text="i"></option>
+                      <label for="exampleFormControlInput4" class="form-label">Genero</label>
+                      <select class="form-control" v-model="date.gender" @click="prueba">
+                        <option selected value="">Seleccione genero</option>
+                        <option v-for="(item,key) in gender" v-text="item" :value="key" ></option>
                       </select>
                     </div>
                     <div class="row">
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Celular</label>
-                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="3105864888">
+                        <label for="exampleFormControlInput5" class="form-label">Celular</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput5" placeholder="3105864888" v-model="date.cell">
                       </div>
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Edad</label>
-                        <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="19">
+                        <label for="exampleFormControlInput6" class="form-label">Edad</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput6" placeholder="19" v-model="date.dob.age">
                       </div>
                     </div>
                     <div class="row">
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">País de origen</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Colombia">
+                        <label for="exampleFormControlInput7" class="form-label">País de origen</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="Colombia">
                       </div>
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Ciudad de residencia</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Confines">
+                        <label for="exampleFormControlInput8" class="form-label">Ciudad de residencia</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput8" placeholder="Confines">
                       </div>
                     </div>
                     <div class="row">
                       <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Nombre de usuario</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="balmon">
+                        <label for="exampleFormControlInput9" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput9" placeholder="balmon">
                       </div>
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput1">
+                        <label for="exampleFormControlInput10" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput10">
                       </div>
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput1" class="form-label">Repetir contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput1">
+                        <label for="exampleFormControlInput11" class="form-label">Repetir contraseña</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput11">
                       </div>
                     </div>
                     
@@ -173,10 +177,11 @@
           </div>
         </section>
 
-        
+
         <!-- /Agg Usuario -->
       </section>
     </div>
+    
     
   </div>
 </body>
