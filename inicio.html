@@ -60,10 +60,9 @@
       <!-- Button trigger modal -->
       <div class="p-5 mt-5 " tabindex="0">
         <section class="container p-3">
-          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Agregar Usuario</button>
-        </section>
-        <section class="container p-3">
-          <button class="btn btn-primary" @click="symbolsConvert">Usuario</button>
+          <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newUser">Agregar Usuario</button>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="">Cambio moneda</button>
+
         </section>
         <section class="container">
           <table class="table">
@@ -85,7 +84,7 @@
                 <td class="fw-bold"><span v-text="i.dob.age"></span></td>
                 <td class="fw-bold"><span v-text="i.location.country"></span></td>
                 <td>
-                  <button class="btn btn-primary">Actualizar</button>
+                  <button class="btn btn-primary">Editar</button>
                   <button class="btn btn-danger">Eliminar</button>
                 </td>
               </tr>
@@ -98,13 +97,13 @@
         <!-- Agg Usuario -->
         <section>
           <!-- Modal -->
-          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+          <div class="modal fade" id="newUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="staticBackdropLabel">Nuevo Usuario</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                   <div class="container">
@@ -125,7 +124,7 @@
                     </div>
                     <div class="mb-3">
                       <label for="exampleFormControlInput4" class="form-label">Genero</label>
-                      <select class="form-control" v-model="date.gender" @click="prueba">
+                      <select class="form-control" v-model="date.gender" @click="imgg">
                         <option selected value="">Seleccione genero</option>
                         <option v-for="(item,key) in gender" v-text="item" :value="key" ></option>
                       </select>
@@ -143,38 +142,36 @@
                     <div class="row">
                       <div class="mb-3 col-sm-6">
                         <label for="exampleFormControlInput7" class="form-label">País de origen</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="Colombia">
+                        <input type="text" class="form-control" id="exampleFormControlInput7" placeholder="Colombia" v-model="date.location.country">
                       </div>
                       <div class="mb-3 col-sm-6">
                         <label for="exampleFormControlInput8" class="form-label">Ciudad de residencia</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput8" placeholder="Confines">
+                        <input type="text" class="form-control" id="exampleFormControlInput8" placeholder="Confines" v-model="date.location.city">
                       </div>
                     </div>
                     <div class="row">
                       <div class="mb-3">
                         <label for="exampleFormControlInput9" class="form-label">Nombre de usuario</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput9" placeholder="balmon">
+                        <input type="text" class="form-control" id="exampleFormControlInput9" placeholder="balmon" v-model="date.login.username">
                       </div>
                       <div class="mb-3 col-sm-6">
                         <label for="exampleFormControlInput10" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput10">
-                      </div>
-                      <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput11" class="form-label">Repetir contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput11">
+                        <input type="password" class="form-control" id="exampleFormControlInput10" v-model="date.login.password">
                       </div>
                     </div>
-                    
-                    
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-primary" @click="saveForm">Guardar</button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Convertidor -->
+
+          <!-- /Convertidor -->
         </section>
 
 
