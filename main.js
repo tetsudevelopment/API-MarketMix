@@ -51,74 +51,6 @@ var app = new Vue({
         this.date.picture.medium = element.picture.medium;
       });
     },
-    saveForm() {
-      const gender = this.date.gender;
-      const first = this.date.first;
-      const last = this.date.last;
-      const email = this.date.email;
-      const cell = this.date.cell;
-      const country = this.date.location.country;
-      const city = this.date.location.city;
-      const age = this.date.dob.age;
-      const username = this.date.login.username;
-      const password = this.date.login.password;
-      if (
-        gender == "" ||
-        first == "" ||
-        last == "" ||
-        email == "" ||
-        cell == "" ||
-        country == "" ||
-        city == "" ||
-        age == "" ||
-        username == "" ||
-        password == ""
-      ) {
-        console.log("If");
-        this.mensajeMixin("Rellene los Espacios en blanco", "error");
-      } else {
-        const usernameRep = this.arrayUser.findIndex((element) => {
-          if (this.date.login.username == element.login.username) {
-            return element;
-          }
-        });
-        console.log(usernameRep);
-        const emailRep = this.arrayUser.findIndex((element) => {
-          if (this.date.email == element.email) {
-            return element;
-         }
-        });
-        console.log(usernameRep);
-        if (usernameRep ==-1) {
-          if (emailRep == -1) {
-            // this.imgg();
-            this.arrayUser.push(this.date);
-            this.updateLocal();
-            setTimeout(() => {
-              this.date.gender='';
-              this.date.first='';
-              this.date.last='';
-              this.date.email='';
-              this.date.cell='';
-              this.date.location.country='';
-              this.date.location.city='';
-              this.date.dob.age='';
-              this.date.login.username='';
-              this.date.login.password='';
-             }, 3000);
-            this.mensajeMixin("Usuario Creado Exitosamente", "success")
-
-          } else {
-            this.mensajeMixin("El email ya se encuentra registrado","error")
-          }
-        } else {
-          this.mensajeMixin(
-            "El usuario ya se encuentra registrado","error");
-        }
-
-
-      }
-    },
     mensajeMixin(title, icon) {
       const Toast = Swal.mixin({
         toast: true,
@@ -233,6 +165,74 @@ var app = new Vue({
         this.arrayLogin = [];
         this.updateSesion();
       }, 3000);
+    },
+    saveForm() {
+      const gender = this.date.gender;
+      const first = this.date.first;
+      const last = this.date.last;
+      const email = this.date.email;
+      const cell = this.date.cell;
+      const country = this.date.location.country;
+      const city = this.date.location.city;
+      const age = this.date.dob.age;
+      const username = this.date.login.username;
+      const password = this.date.login.password;
+      if (
+        gender == "" ||
+        first == "" ||
+        last == "" ||
+        email == "" ||
+        cell == "" ||
+        country == "" ||
+        city == "" ||
+        age == "" ||
+        username == "" ||
+        password == ""
+      ) {
+        console.log("If");
+        this.mensajeMixin("Rellene los Espacios en blanco", "error");
+      } else {
+        const usernameRep = this.arrayUser.findIndex((element) => {
+          if (this.date.login.username == element.login.username) {
+            return element;
+          }
+        });
+        console.log(usernameRep);
+        const emailRep = this.arrayUser.findIndex((element) => {
+          if (this.date.email == element.email) {
+            return element;
+          }
+        });
+        console.log(usernameRep);
+        if (usernameRep == -1) {
+          if (emailRep == -1) {
+            // this.imgg();
+            this.arrayUser.push(this.date);
+            this.updateLocal();
+            setTimeout(() => {
+              this.date.gender = "";
+              this.date.first = "";
+              this.date.last = "";
+              this.date.email = "";
+              this.date.cell = "";
+              this.date.location.country = "";
+              this.date.location.city = "";
+              this.date.dob.age = "";
+              this.date.login.username = "";
+              this.date.login.password = "";
+            }, 3000);
+            this.mensajeMixin("Usuario Creado Exitosamente", "success");
+          } else {
+            this.mensajeMixin("El email ya se encuentra registrado", "error");
+          }
+        } else {
+          this.mensajeMixin("El usuario ya se encuentra registrado", "error");
+        }
+      }
+    },
+    del(index) {
+      this.arrayUser.splice(index, 1);
+      this.updateLocal();
     },
   },
   created() {

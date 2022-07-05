@@ -77,7 +77,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="i in arrayUser">
+              <tr v-for="(i,index) in arrayUser">
                 <th class="text-center"><img :src="i.picture.medium" alt="" class=""></th>
                 <td class="fw-bold w-25"><span v-text="i.name.first"></span> <span v-text="i.name.last"></span></td>
                 <td class="fw-bold w-25"><span v-text="i.email"></span></td>
@@ -85,7 +85,7 @@
                 <td class="fw-bold"><span v-text="i.location.country"></span></td>
                 <td>
                   <button class="btn btn-primary">Editar</button>
-                  <button class="btn btn-danger">Eliminar</button>
+                  <button class="btn btn-danger" @click="del(index)">Eliminar</button>
                 </td>
               </tr>
             </tbody>
