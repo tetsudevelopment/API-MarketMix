@@ -3,10 +3,14 @@ var app = new Vue({
   data: {
     arrayUser: [],
     arrayLogin: [],
+    symbolsP:[],
     img: "",
     from: "",
     to: "",
     amount: "",
+    result: {
+      result:0
+    },
     gender: {
       female: "Femenino",
       male: "Masculino",
@@ -17,22 +21,22 @@ var app = new Vue({
         medium: "",
       },
       name: {
-        first: "s",
-        last: "s",
+        first: "",
+        last: "",
       },
       email: "maxime.ma@example.com",
-      cell: "2",
+      cell: "",
       location: {
-        country: "sa",
-        city: "as",
+        country: "",
+        city: "",
       },
       dob: {
-        age: "sa",
+        age: "",
         date: "",
       },
       login: {
         username: "",
-        password: "ssa",
+        password: "",
       },
     },
     search: "",
@@ -86,8 +90,9 @@ var app = new Vue({
         .then((json) => (this.arrayData = [json]));
     },
     async symbolsConvert() {
+      console.log('Entrando a Symbols');
       const myHeaders = new Headers();
-      myHeaders.append("apikey", "T8uhWDyJJHSdR47zvtal2J50NAlbJR5v");
+      myHeaders.append("apikey", "V3ggGQF8SIW9GM8WOIdVwl3ERcQq2phk");
 
       const requestOptions = {
         method: "GET",
@@ -100,12 +105,13 @@ var app = new Vue({
         requestOptions
       )
         .then((response) => response.json())
-        .then((result) => console.log(result.symbols))
+        .then((result) => this.symbolsP= result.symbols)
         .catch((error) => console.log("error", error));
+      this.updateLocal();
     },
     async convert() {
       const myHeaders = new Headers();
-      myHeaders.append("apikey", "T8uhWDyJJHSdR47zvtal2J50NAlbJR5v");
+      myHeaders.append("apikey", "V3ggGQF8SIW9GM8WOIdVwl3ERcQq2phk");
 
       const requestOptions = {
         method: "GET",
@@ -114,12 +120,19 @@ var app = new Vue({
       };
 
       fetch(
-        "https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}",
+        `https://api.apilayer.com/exchangerates_data/convert?to=${this.to}&from=${this.from}&amount=${this.amount}`,
         requestOptions
       )
         .then((response) => response.text())
-        .then((result) => console.log(result))
+        .then((result) => this.result= JSON.parse(result))
         .catch((error) => console.log("error", error));
+      
+    },
+    cambio() {
+            this.to = "";
+            this.amount = "";
+            this.from = "";
+            this.result = { result: 0 };
     },
     locaDatosStora() {
       if (localStorage.getItem("users") !== null) {
@@ -127,9 +140,15 @@ var app = new Vue({
       } else {
         this.listUser();
       }
+      if (localStorage.getItem("symbols") !== null) {
+        this.symbolsP = JSON.parse(localStorage.getItem("symbols"));
+      } else {
+        this.symbolsConvert();
+      }
     },
     updateLocal() {
       localStorage.setItem("users", JSON.stringify(this.arrayUser));
+      localStorage.setItem("symbols", JSON.stringify(this.symbolsP));
     },
     sesionDatos() {
       if (sessionStorage.getItem("users") !== null) {
@@ -242,3 +261,18 @@ var app = new Vue({
   mounted() {},
   computed: {},
 });
+
+// {
+//     "success": true,
+//     "query": {
+//         "from": "AED",
+//         "to": "AFN",
+//         "amount": 2000
+//     },
+//     "info": {
+//         "timestamp": 1657043795,
+//         "rate": 23.880767
+//     },
+//     "date": "2022-07-05",
+//     "result": 47761.534
+// }
