@@ -3,20 +3,83 @@ var app = new Vue({
   data: {
     arrayUser: [],
     arrayLogin: [],
-    symbolsP:[],
+    symbolsP: [],
     img: "",
     from: "",
     to: "",
     amount: "",
     result: {
-      result:0
+      result: 0,
     },
     gender: {
       female: "Femenino",
       male: "Masculino",
     }, //
+    search: "",
+    user: "",
+    pass: "",
+    passOld: "",
+    passNew: "",
+    passRep: "",
+    editData: {
+      gender: "male",
+      name: {
+        title: "Mr",
+        first: "Agustín",
+        last: "Zúñiga",
+      },
+      location: {
+        street: {
+          number: 6245,
+          name: "Prolongación Guinea Ecuatorial",
+        },
+        city: "Ameca",
+        state: "Sonora",
+        country: "Mexico",
+        postcode: 21820,
+        coordinates: {
+          latitude: "26.2559",
+          longitude: "-118.6642",
+        },
+        timezone: {
+          offset: "+8:00",
+          description: "Beijing, Perth, Singapore, Hong Kong",
+        },
+      },
+      email: "agustin.zuniga@example.com",
+      login: {
+        uuid: "0fd9e0c2-26c1-49e0-85a8-d80b7f3f5a59",
+        username: "purpleleopard841",
+        password: "facial",
+        salt: "kzXeK5as",
+        md5: "9117015298ba6cfae61e3fd53c3da164",
+        sha1: "e74e8cd1f3713bdfa507236778971ee1ed7ff4ae",
+        sha256:
+          "7f97340645e2bd1978b7a57ee7d04e49b72cdec5b09c02450dd2a3a9d6ef3b55",
+      },
+      dob: {
+        date: "1973-06-15T06:22:19.380Z",
+        age: 49,
+      },
+      registered: {
+        date: "2002-06-27T12:04:38.287Z",
+        age: 20,
+      },
+      phone: "(649) 293 6351",
+      cell: "(638) 413 1373",
+      id: {
+        name: "NSS",
+        value: "83 66 13 7547 5",
+      },
+      picture: {
+        large: "https://randomuser.me/api/portraits/men/74.jpg",
+        medium: "https://randomuser.me/api/portraits/med/men/74.jpg",
+        thumbnail: "https://randomuser.me/api/portraits/thumb/men/74.jpg",
+      },
+      nat: "MX",
+    },
     date: {
-      gender: "female",
+      gender: "",
       picture: {
         medium: "",
       },
@@ -24,7 +87,7 @@ var app = new Vue({
         first: "",
         last: "",
       },
-      email: "maxime.ma@example.com",
+      email: "",
       cell: "",
       location: {
         country: "",
@@ -39,9 +102,6 @@ var app = new Vue({
         password: "",
       },
     },
-    search: "",
-    user: "",
-    pass: "",
   },
   methods: {
     async imgg() {
@@ -90,7 +150,7 @@ var app = new Vue({
         .then((json) => (this.arrayData = [json]));
     },
     async symbolsConvert() {
-      console.log('Entrando a Symbols');
+      console.log("Entrando a Symbols");
       const myHeaders = new Headers();
       myHeaders.append("apikey", "V3ggGQF8SIW9GM8WOIdVwl3ERcQq2phk");
 
@@ -105,7 +165,7 @@ var app = new Vue({
         requestOptions
       )
         .then((response) => response.json())
-        .then((result) => this.symbolsP= result.symbols)
+        .then((result) => (this.symbolsP = result.symbols))
         .catch((error) => console.log("error", error));
       this.updateLocal();
     },
@@ -124,15 +184,14 @@ var app = new Vue({
         requestOptions
       )
         .then((response) => response.text())
-        .then((result) => this.result= JSON.parse(result))
+        .then((result) => (this.result = JSON.parse(result)))
         .catch((error) => console.log("error", error));
-      
     },
     cambio() {
-            this.to = "";
-            this.amount = "";
-            this.from = "";
-            this.result = { result: 0 };
+      this.to = "";
+      this.amount = "";
+      this.from = "";
+      this.result = { result: 0 };
     },
     locaDatosStora() {
       if (localStorage.getItem("users") !== null) {
@@ -252,6 +311,9 @@ var app = new Vue({
     del(index) {
       this.arrayUser.splice(index, 1);
       this.updateLocal();
+    },
+    edit(index) {
+      this.editData = JSON.parse(JSON.stringify(this.arrayUser[index]));
     },
   },
   created() {

@@ -84,7 +84,7 @@
                 <td class="fw-bold"><span v-text="i.dob.age"></span></td>
                 <td class="fw-bold"><span v-text="i.location.country"></span></td>
                 <td>
-                  <button class="btn btn-primary">Editar</button>
+                  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUser" @click="edit(index)">Editar</button>
                   <button class="btn btn-danger" @click="del(index)">Eliminar</button>
                 </td>
               </tr>
@@ -211,9 +211,85 @@
           </div>
           <!-- /Convertidor -->
         </section>
-
-
         <!-- /Agg Usuario -->
+        <!-- Editar -->
+        <section>
+          <div class="modal fade" id="editUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Editar Usuario</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="exampleFormControlInput1a" placeholder="name@example.com" v-model="editData.email">
+          
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput2" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput2a" placeholder="Brayan" v-model="editData.name.first">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput3" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput3a" placeholder="Marin" v-model="editData.name.last">
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput4" class="form-label">Genero</label>
+                      <input type="text" class="form-control" id="exampleFormControlInput3ac" placeholder="Marin" v-model="editData.gender" disabled>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-sm-12">
+                        <label for="exampleFormControlInput6" class="form-label">Edad</label>
+                        <input type="number" class="form-control" id="exampleFormControlInput6a" placeholder="19" v-model="editData.dob.age">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput7" class="form-label">País de origen</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput7a" placeholder="Colombia" v-model="editData.location.country" disabled>
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput8" class="form-label">Ciudad de residencia</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput8a" placeholder="Confines"
+                        v-model="editData.location.city" disabled>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput9" class="form-label">Nombre de usuario</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput9a" placeholder="balmon" v-model="editData.login.username" disabled>
+                      </div>
+                      <h3>Cambiar Contraseña</h3>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput10" class="form-label">Contraseña Antigua</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput10a" v-model="passOld">
+                      </div>
+                      <div class="mb-3 col-sm-6">
+                        <label for="exampleFormControlInput10" class="form-label">Nueva Contraseña</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput10axx" v-model="passNew">
+                      </div>
+                      <div class="mb-3 col-sm-12">
+                        <label for="exampleFormControlInput10" class="form-label">Repetir Contraseña</label>
+                        <input type="password" class="form-control" id="exampleFormControlInput10ax" v-model="passRep">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /Editar -->
       </section>
     </div>
     
