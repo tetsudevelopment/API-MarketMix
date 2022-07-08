@@ -1,6 +1,7 @@
 var app = new Vue({
   el: "#app",
   data: {
+    status: 0,
     arrayUser: [],
     arrayLogin: [],
     symbolsP: [],
@@ -128,7 +129,6 @@ var app = new Vue({
         title: title,
       });
     },
-    mensajeAfirm() {},
     async listUser() {
       const url = "https://randomuser.me/api/?results=10";
       await fetch(url)
@@ -233,7 +233,7 @@ var app = new Vue({
           this.updateSesion();
         }, 3000);
       } else {
-        alert("Usuario o Contraseña no son correctos");
+        this.mensajeMixin('Usuario o contraseña no son correctos','error')
       }
     },
     logout() {
@@ -314,6 +314,55 @@ var app = new Vue({
     },
     edit(index) {
       this.editData = JSON.parse(JSON.stringify(this.arrayUser[index]));
+    },
+    cambio() {
+      if (this.status == 0) {
+        this.status = 1;
+      } else {
+        this.status = 0;
+      }
+    },
+    save() {
+      let passOld = this.passOld;
+      let passNew = this.passNew;
+      let passRep = this.passRep;
+      let pass = this.editData.login.password;
+      if (this.status == 1) {
+        if (passOld != '' && passNew != '' && passRep != '') {
+          if (passOld == pass) {
+            if (passNew.length>4) {
+              if (passNew == passRep) {
+                this.editData.login.password = passNew;
+                let index = this.arrayUser.findIndex(element => {
+                  if (element.email == this.editData.email) {
+                    return element;
+                  }
+                });
+                console.log(index);
+                let borrado = this.arrayUser.splice(index, 1, this.editData)
+                this.editData.login.password = this.passRep;
+                console.log(borrado);
+                this.mensajeMixin('Datos cambiados exitosamente', 'success')
+                this.updateLocal();
+                this.updateSesion();
+                this.passNew = '';
+                this.passOld = '';
+                this.passRep = '';
+              } else {
+                this.mensajeMixin('Las contraseñas no coinciden','error')
+              }
+            } else {
+              this.mensajeMixin('La contraseña debe tener minimo 5 caracteres','error')
+            }
+          } else {
+            this.mensajeMixin('La contraseña ingresada no es la actual, verifique','error')
+          }
+        } else {
+          this.mensajeMixin('Rellene los espacios vacios', 'error')
+        }
+      } else {
+        this.mensajeMixin('Datos Guardados Exitosamente','success')
+      }
     },
   },
   created() {

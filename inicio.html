@@ -226,17 +226,17 @@
                   <div class="container">
                     <div class="mb-3">
                       <label for="exampleFormControlInput1" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="exampleFormControlInput1a" placeholder="name@example.com" v-model="editData.email">
+                      <input type="email" class="form-control" id="exampleFormControlInput1a" placeholder="name@example.com" v-model="editData.email" disabled>
           
                     </div>
                     <div class="row">
                       <div class="mb-3 col-sm-6">
                         <label for="exampleFormControlInput2" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput2a" placeholder="Brayan" v-model="editData.name.first">
+                        <input type="text" class="form-control" id="exampleFormControlInput2a" placeholder="Brayan" v-model="editData.name.first" disabled>
                       </div>
                       <div class="mb-3 col-sm-6">
                         <label for="exampleFormControlInput3" class="form-label">Apellido</label>
-                        <input type="text" class="form-control" id="exampleFormControlInput3a" placeholder="Marin" v-model="editData.name.last">
+                        <input type="text" class="form-control" id="exampleFormControlInput3a" placeholder="Marin" v-model="editData.name.last" disabled>
                       </div>
                     </div>
                     <div class="mb-3">
@@ -246,7 +246,7 @@
                     <div class="row">
                       <div class="mb-3 col-sm-12">
                         <label for="exampleFormControlInput6" class="form-label">Edad</label>
-                        <input type="number" class="form-control" id="exampleFormControlInput6a" placeholder="19" v-model="editData.dob.age">
+                        <input type="number" class="form-control" id="exampleFormControlInput6a" placeholder="19" v-model="editData.dob.age" disabled>
                       </div>
                     </div>
                     <div class="row">
@@ -267,22 +267,29 @@
                       </div>
                       <h3>Cambiar Contraseña</h3>
                       <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput10" class="form-label">Contraseña Antigua</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput10a" v-model="passOld">
+                        <button type="button" class="btn btn-primary" @click="cambio">Cambiar clave</button>
                       </div>
-                      <div class="mb-3 col-sm-6">
-                        <label for="exampleFormControlInput10" class="form-label">Nueva Contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput10axx" v-model="passNew">
+                      <div v-if="status==1" class="row">
+                        <div class="mb-3 col-sm-12">
+                          <label for="exampleFormControlInput10" class="form-label">Contraseña Antigua</label>
+                          <input type="password" class="form-control" id="exampleFormControlInput10a" v-model="passOld">
+                        </div>
+                        <div class="mb-3 col-sm-6">
+                          <label for="exampleFormControlInput10" class="form-label">Nueva Contraseña</label>
+                          <input type="password" class="form-control" id="exampleFormControlInput10axx" v-model="passNew">
+                        </div>
+                        <div class="mb-3 col-sm-6">
+                          <label for="exampleFormControlInput10" class="form-label">Repetir Contraseña</label>
+                          <input type="password" class="form-control" id="exampleFormControlInput10ax" v-model="passRep">
+                        </div>
                       </div>
-                      <div class="mb-3 col-sm-12">
-                        <label for="exampleFormControlInput10" class="form-label">Repetir Contraseña</label>
-                        <input type="password" class="form-control" id="exampleFormControlInput10ax" v-model="passRep">
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-primary" @click="save" data-bs-dismiss="modal" v-if="status==0">Guardar</button>
+                  <button type="button" class="btn btn-primary" @click="save" v-else>Guardar</button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
               </div>
